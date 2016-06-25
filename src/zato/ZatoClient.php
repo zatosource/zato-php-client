@@ -20,14 +20,14 @@ class ZatoClient
     private $headers = [];
 
     /**
-     * @var Auth
+     * @var string
      */
-    protected $auth;
+    protected $user;
 
     /**
      * @var string
      */
-    protected $username;
+    protected $pass;
 
     /**
      * @var string
@@ -68,9 +68,9 @@ class ZatoClient
     {
         $this->_config = array_merge(
             [
+                'scheme' => 'http',
                 'user' => 'pubapi',
                 'pass' => 'default',
-                'scheme' => 'http',
                 'hostname' => 'localhost',
                 'port' => 11223,
                 'api_base' => 'zato/',
@@ -78,21 +78,20 @@ class ZatoClient
             $config
         );
 
+        $this->scheme    = $this->_config['scheme'];
         $this->user      = $this->_config['user'];
         $this->pass      = $this->_config['pass'];
         $this->hostname  = $this->_config['hostname'];
-        $this->scheme    = $this->_config['scheme'];
         $this->port      = $this->_config['port'];
-
-        $this->_apiUrl = "{$this->scheme}://{$this->hostname}:{$this->port}/{$this->_config['api_base']}";
+        $this->_apiUrl   = "{$this->scheme}://{$this->hostname}:{$this->port}/{$this->_config['api_base']}";
 
         $guzzOptions = array_merge([
             'base_uri' => $this->_apiUrl,
             'auth' => array($this->user, $this->pass)
         ], $client_opts);
-        $this->guzzle = new Client($guzzOptions);
 
-        $this->debug      = new Debug();
+        $this->guzzle = new Client($guzzOptions);
+        $this->debug  = new Debug();
     }
 
     /**
@@ -120,7 +119,7 @@ class ZatoClient
      */
     public function getUserAgent()
     {
-        return 'zatoAPI PHP ' . self::VERSION;
+        return 'zato PHP client ' . self::VERSION;
     }
 
     /**
@@ -187,11 +186,29 @@ class ZatoClient
         return $endpoint->execute();
     }
 
-
+    /**
+     * Invokes a service by its ID or name. From the service’s viewpoint, there is no difference between being invoked
+     * directly, through a channel or if using zato.service.invoke.
+     *
+     * If executing a service in async mode, its response will be a CID it’s been invoked with.
+     *
+     * Client configuration settings include the following options:
+     *
+     *
+     * - id	            int	        Service ID. Either id or name must be provided.
+     * - name	        string	    Service name. Either id or name must be provided.
+     * - payload		string      Data to be used as input by the zato service, can be any PHP type except a resource.
+     * - channel	    string	    Channel the service will believe it’s being invoked over
+     * - data_format	string	    Payload’s data format (json set as default)
+     * - transport	    string	    Transport the service should believe it’s being invoked with
+     * - async	        boolean	    Whether the service should be invoked asynchronously, defaults to False
+     * - expiration	    int	    	If using async mode, after how many seconds the message should expire, defaults to 15 seconds
+     *
+     * @param array $params
+     * @return mixed
+     */
     public function serviceInvoke($params)
     {
-        $params['data_format'] = 'json';
-        
         $endpoint = new Invoke($this);
         return $endpoint->execute($params);
     }

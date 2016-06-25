@@ -15,6 +15,6 @@ class PingTest extends BasicTest
         $res = $this->client->ping();
         #$res = $this->client->serviceInvoke(array('name' => 'zone-download.zone-ftp-details'));
 
-        var_dump($res);
+        #var_dump($res);
     }
 }
