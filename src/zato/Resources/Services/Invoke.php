@@ -1,7 +1,7 @@
 <?php
-namespace Zato\API\Resources\Services;
+namespace zato\Resources\Services;
 
-use Zato\API\Resources\ResourceAbstract;
+use zato\Resources\ResourceAbstract;
 
 
 class Invoke extends ResourceAbstract
@@ -14,6 +14,11 @@ class Invoke extends ResourceAbstract
     public function execute($params = array())
     {
         $response = $this->client->post('/zato/json/zato.service.invoke', $params);
-        return base64_decode($response->zato_service_invoke_response->response);
+        return json_decode(base64_decode($response->zato_service_invoke_response->response));
+    }
+
+    public static function ex($params = array())
+    {
+
     }
 }

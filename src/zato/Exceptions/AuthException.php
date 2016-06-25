@@ -1,5 +1,5 @@
 <?php
-namespace Zato\API\Exceptions;
+namespace zato\Exceptions;
 /**
  * AuthException is for auth specific errors
  * @package Zendesk\API

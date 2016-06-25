@@ -1,5 +1,5 @@
 <?php
-namespace Zato\API\Exceptions;
+namespace zato\Exceptions;
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -8,7 +8,7 @@ use GuzzleHttp\Exception\ServerException;
 /**
  * Class ApiResponseException
  *
- * @package Zato\API\Exceptions
+ * @package zato\API\Exceptions
  */
 class ApiResponseException extends \Exception
 {

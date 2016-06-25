@@ -1,8 +1,8 @@
 <?php
 
-namespace Zato\API\Resources;
+namespace zato\Resources;
 
-use Zato\API\HttpClient;
+use zato\ZatoClient;
 
 abstract class ResourceAbstract
 {
@@ -14,7 +14,7 @@ abstract class ResourceAbstract
     /**
      * @param HttpClient $client
      */
-    public function __construct(HttpClient $client)
+    public function __construct(ZatoClient $client)
     {
         $this->client = $client;
     }

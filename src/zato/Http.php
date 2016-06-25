@@ -1,11 +1,13 @@
 <?php
-namespace Zato\API;
+namespace zato;
 
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7\LazyOpenStream;
 use GuzzleHttp\Psr7\Request;
-use Zato\API\Exceptions\ApiResponseException;
-use Zato\API\Exceptions\AuthException;
+use zato\Exceptions\ApiResponseException;
+use zato\Exceptions\AuthException;
 
 
 class Http
@@ -29,7 +31,7 @@ class Http
      * @throws AuthException
      */
     public static function send(
-        HttpClient $client,
+        ZatoClient $client,
         $endPoint,
         $options = []
     ) {
@@ -71,6 +73,8 @@ class Http
                 $request = $request->withBody($fileStream);
             }
         }
+        // For debug
+        $requestBody = $request->getBody()->getContents();
 
         if (!empty($options['queryParams'])) {
             foreach ($options['queryParams'] as $queryKey => $queryValue) {
@@ -82,14 +86,23 @@ class Http
 
         try {
             $response = $client->guzzle->send($request, $requestOptions);
-        } catch (RequestException $e) {
+        } catch (ServerException $e) {
+            $response = $e->getResponse();
+            $requestException = RequestException::create($e->getRequest(), $e->getResponse());
+            throw new ApiResponseException($requestException);
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            $requestException = RequestException::create($e->getRequest(), $e->getResponse());
+            throw new ApiResponseException($requestException);
+        }
+        catch (RequestException $e) {
             $requestException = RequestException::create($e->getRequest(), $e->getResponse());
             throw new ApiResponseException($requestException);
         } finally {
 
             $client->setDebug(
                 $request->getHeaders(),
-                $request->getBody()->getContents(),
+                $requestBody,
                 isset($response) ? $response->getStatusCode() : null,
                 isset($response) ? $response->getHeaders() : null,
                 isset($e) ? $e : null

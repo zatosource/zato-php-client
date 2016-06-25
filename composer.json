@@ -1,5 +1,6 @@
 {
   "name": "zato/apiclient",
+  "type": "library",
   "description": "Client Library for zato public services",
   "minimum-stability": "stable",
   "license": "LGPLv3",
@@ -11,7 +12,6 @@
   ],
   "require": {
     "php": ">=5.5",
-    "monolog/monolog": "^1.19",
     "guzzlehttp/guzzle": "~6.0",
     "guzzlehttp/psr7": "^1.2"
   },
@@ -19,8 +19,8 @@
     "phpunit/phpunit": "~4"
   },
   "autoload": {
-    "psr-0": {
-      "Zato\\API\\": "src/"
+    "psr-4": {
+      "zato\\": "src/zato"
     }
   }
 }

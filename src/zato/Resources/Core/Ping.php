@@ -1,6 +1,6 @@
 <?php
-namespace Zato\API\Resources\Core;
-use Zato\API\Resources\ResourceAbstract;
+namespace zato\Resources\Core;
+use zato\Resources\ResourceAbstract;
 
 
 class Ping extends ResourceAbstract

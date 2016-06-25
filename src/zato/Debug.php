@@ -1,6 +1,6 @@
 <?php
 
-namespace Zato\API;
+namespace zato;
 
 /**
  * Debug helper class

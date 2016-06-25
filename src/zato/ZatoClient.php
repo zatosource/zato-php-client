@@ -1,15 +1,15 @@
 <?php
 
-namespace Zato\API;
+namespace zato;
 
 use \GuzzleHttp\Client;
-use \Zato\API\Resources\Core\Ping;
-use \Zato\API\Resources\Services\Invoke;
+use \zato\Resources\Core\Ping;
+use \zato\Resources\Services\Invoke;
 
 /**
- * Class Zato_Client
+ * Class zato_Client
  */
-class HttpClient
+class ZatoClient
 {
     const VERSION = '0.1';
 
@@ -64,10 +64,12 @@ class HttpClient
      */
     private $_config;
 
-    public function __construct($config = array())
+    public function __construct($config = array(), $client_opts = array())
     {
         $this->_config = array_merge(
             [
+                'user' => 'pubapi',
+                'pass' => 'default',
                 'scheme' => 'http',
                 'hostname' => 'localhost',
                 'port' => 11223,
@@ -83,10 +85,12 @@ class HttpClient
         $this->port      = $this->_config['port'];
 
         $this->_apiUrl = "{$this->scheme}://{$this->hostname}:{$this->port}/{$this->_config['api_base']}";
-        $this->guzzle = new Client([
+
+        $guzzOptions = array_merge([
             'base_uri' => $this->_apiUrl,
             'auth' => array($this->user, $this->pass)
-        ]);
+        ], $client_opts);
+        $this->guzzle = new Client($guzzOptions);
 
         $this->debug      = new Debug();
     }
@@ -116,7 +120,7 @@ class HttpClient
      */
     public function getUserAgent()
     {
-        return 'ZatoAPI PHP ' . self::VERSION;
+        return 'zatoAPI PHP ' . self::VERSION;
     }
 
     /**
@@ -175,15 +179,19 @@ class HttpClient
     }
 
     /**
-     * A ping service which always returns a constant string. Useful for testing clients against Zato clusters.
+     * A ping service which always returns a constant string. Useful for testing clients against zato clusters.
      */
     public function ping()
     {
-        return new Ping($this);
+        $endpoint = new Ping($this);
+        return $endpoint->execute();
     }
+
 
     public function serviceInvoke($params)
     {
+        $params['data_format'] = 'json';
+        
         $endpoint = new Invoke($this);
         return $endpoint->execute($params);
     }
