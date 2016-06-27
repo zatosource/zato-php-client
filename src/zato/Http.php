@@ -93,7 +93,14 @@ class Http
         } catch (ClientException $e) {
             $response = $e->getResponse();
             $requestException = RequestException::create($e->getRequest(), $e->getResponse());
-            throw new ApiResponseException($requestException);
+
+            if ($e->getCode() == 401) {
+                throw new AuthException($requestException);
+
+            } else {
+                throw new ApiResponseException($requestException);
+
+            }
         }
         catch (RequestException $e) {
             $requestException = RequestException::create($e->getRequest(), $e->getResponse());
@@ -110,7 +117,6 @@ class Http
 
             $request->getBody()->rewind();
         }
-
 
         return json_decode($response->getBody()->getContents());
     }

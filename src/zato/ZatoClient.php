@@ -146,7 +146,8 @@ class ZatoClient
     }
 
     /**
-     * Returns debug information in an object
+     * Returns debug information from last call
+     * in an object
      *
      * @return Debug
      */
