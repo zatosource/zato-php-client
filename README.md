@@ -18,6 +18,13 @@ Next, add a composer.json file containing the following:
 }
 ```
 
+Alternatively you can use composer require in your project
+
+```sh
+/opt/local/bin/composer/composer require zato/api-client
+```
+
+
 Then, install!
 
 ```sh
