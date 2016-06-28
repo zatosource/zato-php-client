@@ -1,5 +1,5 @@
 # PHP API client for Zato services
-This clients offers developers an easy
+This client offers developers an easy
 way to invoke Zato services
 
 To get started, install composer in your project:
