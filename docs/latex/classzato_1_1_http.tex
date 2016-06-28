@@ -1,0 +1,51 @@
+\hypertarget{classzato_1_1_http}{}\section{zato\textbackslash{}Http Class Reference}
+\label{classzato_1_1_http}\index{zato\textbackslash{}\+Http@{zato\textbackslash{}\+Http}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classzato_1_1_http_ab8da8edaebf17ce03a9c8cc99fe19195}{send} (\hyperlink{classzato_1_1_zato_client}{Zato\+Client} \$client, \$end\+Point, \$options=\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classzato_1_1_http_a7f3a9250c9cf8b9c9c16b6c40870590f}{}static {\bfseries \$curl}\label{classzato_1_1_http_a7f3a9250c9cf8b9c9c16b6c40870590f}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classzato_1_1_http_ab8da8edaebf17ce03a9c8cc99fe19195}{}\index{zato\+::\+Http@{zato\+::\+Http}!send@{send}}
+\index{send@{send}!zato\+::\+Http@{zato\+::\+Http}}
+\subsubsection[{send(\+Zato\+Client \$client, \$end\+Point, \$options=[])}]{\setlength{\rightskip}{0pt plus 5cm}static zato\textbackslash{}\+Http\+::send (
+\begin{DoxyParamCaption}
+\item[{{\bf Zato\+Client}}]{\$client, }
+\item[{}]{\$end\+Point, }
+\item[{}]{\$options = {\ttfamily \mbox{[}\mbox{]}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classzato_1_1_http_ab8da8edaebf17ce03a9c8cc99fe19195}
+Use the send method to call every endpoint
+
+
+\begin{DoxyParams}[1]{Parameters}
+Http\+Client & {\em \$client} & \\
+\hline
+string & {\em \$end\+Point} & E.\+g. \char`\"{}/ping\char`\"{} \\
+\hline
+array & {\em \$options} & Available options are listed below\+: array \$query\+Params Array of unencoded key-\/value pairs, e.\+g. \mbox{[}\char`\"{}ids\char`\"{} =$>$ \char`\"{}1,2,3,4\char`\"{}\mbox{]} array \$post\+Fields Array of unencoded key-\/value pairs, e.\+g. \mbox{[}\char`\"{}filename\char`\"{} =$>$ \char`\"{}blah.\+png\char`\"{}\mbox{]} string \$method \char`\"{}\+G\+E\+T\char`\"{}, \char`\"{}\+P\+O\+S\+T\char`\"{}, etc. Default is G\+E\+T. string \$content\+Type Default is \char`\"{}application/json\char`\"{}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed The response body, parsed from J\+S\+O\+N into an object. Also returns bool or null if something went wrong 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Api\+Response\+Exception} & \\
+\hline
+{\em Auth\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/zato/Http.\+php\end{DoxyCompactItemize}

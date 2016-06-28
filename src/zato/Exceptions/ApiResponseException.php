@@ -8,7 +8,7 @@ use GuzzleHttp\Exception\ServerException;
 /**
  * Class ApiResponseException
  *
- * @package zato\API\Exceptions
+ * @package zato\Exceptions
  */
 class ApiResponseException extends \Exception
 {

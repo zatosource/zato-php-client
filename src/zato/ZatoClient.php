@@ -159,11 +159,11 @@ class ZatoClient
     /**
      * This is a helper method to do a post request.
      *
-     * @param       $endpoint
+     * @param string $endpoint
      * @param array $postData
      *
-     * @return array
-     * @throws Exceptions\ApiResponseException
+     * @return stdClass
+     * @throws ApiResponseException
      */
     public function post($endpoint, $postData = [])
     {
@@ -180,6 +180,8 @@ class ZatoClient
 
     /**
      * A ping service which always returns a constant string. Useful for testing clients against zato clusters.
+     *
+     * @return stdClass Object that has the same properties as the corresponding zato response
      */
     public function ping()
     {
@@ -206,7 +208,7 @@ class ZatoClient
      * - expiration	    int	    	If using async mode, after how many seconds the message should expire, defaults to 15 seconds
      *
      * @param array $params
-     * @return mixed
+     * @return stdClass Decoded payload object from service invoke
      */
     public function serviceInvoke($params)
     {

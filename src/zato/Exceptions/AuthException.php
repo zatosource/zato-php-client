@@ -2,7 +2,7 @@
 namespace zato\Exceptions;
 /**
  * AuthException is for auth specific errors
- * @package Zendesk\API
+ * @package zato\Exceptions
  */
 class AuthException extends \Exception
 {
