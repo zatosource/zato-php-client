@@ -1,5 +1,5 @@
 {
-  "name": "zato/apiclient",
+  "name": "zato/api-client",
   "type": "library",
   "description": "Client Library for zato public services",
   "minimum-stability": "stable",
