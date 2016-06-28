@@ -1,6 +1,6 @@
-# zato-php-client
-This client provides developers an easy way to invoke zato services using zato public api,
-it can easily be extended to provide support for other public api resources.
+# PHP API client for Zato services
+This clients offers developers an easy
+way to invoke Zato services
 
 To get started, install composer in your project:
 
@@ -34,9 +34,9 @@ $ php composer.phar install
 Usage
 -----
 
-Using the zato php api client is easy:
+Using the Zato PHP API client is easy:
 
-First set your public api password in zato webadmin security (https://zato.io/docs/web-admin/security/basic-auth.html)
+First, create a new set of HTTP Basic Auth credentials (username: php.client) (https://zato.io/docs/web-admin/security/basic-auth.html)
 
 Then use the client as follows:
 ``` php

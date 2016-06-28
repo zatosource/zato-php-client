@@ -1,7 +1,7 @@
 {
   "name": "zato/api-client",
   "type": "library",
-  "description": "Client Library for zato public services",
+  "description": "PHP API client for Zato services",
   "minimum-stability": "stable",
   "license": "LGPLv3",
   "authors": [
