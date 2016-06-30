@@ -35,6 +35,11 @@ JSON;
                 [
                     'Server' => 'Zato',
                     'X-Zato-CID' => 'K183532160854289289145189943570064602750'
+                ], $body),
+            new Response(200,
+                [
+                    'Server' => 'Zato',
+                    'X-Zato-CID' => 'K183532160854289289145189943570064602750'
                 ], $body)
         ]);
 
@@ -43,6 +48,9 @@ JSON;
         $client = new ZatoClient(array(), ['handler' => $handler]);
 
         $res = $client->serviceInvoke(array('name' => 'zone-download.zone-ftp-details'));
+        $this->assertEquals(json_decode(base64_decode($payload)), $res);
+
+        $res = $client->serviceInvoke(array('name' => 'zone-download.zone-ftp-details', 'endpoint' => '/invoke.php'));
         $this->assertEquals(json_decode(base64_decode($payload)), $res);
     }
 }
