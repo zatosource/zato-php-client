@@ -206,6 +206,7 @@ class ZatoClient
      * - transport	    string	    Transport the service should believe it’s being invoked with
      * - async	        boolean	    Whether the service should be invoked asynchronously, defaults to False
      * - expiration	    int	    	If using async mode, after how many seconds the message should expire, defaults to 15 seconds
+     * - endpoint       string      if using a custom channel the endpoint can be specified here, if no endpoint specified it will set the pubapi one
      *
      * @param array $params
      * @return stdClass Decoded payload object from service invoke

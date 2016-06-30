@@ -21,7 +21,9 @@ class Invoke extends ResourceAbstract
             $params['payload'] = base64_encode($params['payload']);
         }
 
-        $response = $this->client->post('/zato/json/zato.service.invoke', $params);
+        $endpoint = (isset($params['endpoint'])) ? $params['endpoint'] : '/zato/json/zato.service.invoke';
+        
+        $response = $this->client->post($endpoint, $params);
 
         return json_decode(base64_decode($response->zato_service_invoke_response->response));
     }
